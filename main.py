@@ -35,6 +35,7 @@ def menu():
     """
 
     print("""
+    ___________________________________________________________________________________________________________________
     
     Welcome to the SUPER HERO SEARCH AND SORT!
     
@@ -42,9 +43,10 @@ def menu():
     database, and even add your own superhero to the Database! (Note: Please enter the ID accurately and exactly) 
     
     1. Search for SuperHero using their Superhero ID
-    2. View Sorted Superhero Database (Sorted by their SuperHero ID in ascending order with DC Superheros appearing first, follwed by Marvel SuperHeros.) 
+    2. View Sorted Superhero Database (Sorted by their SuperHero ID in ascending order with DC Superheros appearing first,followed by Marvel SuperHeros.) 
     3. Add your own Superhero
     4. Exit the program
+    ___________________________________________________________________________________________________________________
     """)
 
     USER_INPUT = input("Select your choice: ")
@@ -306,7 +308,8 @@ if __name__ == "__main__":
 
             #DATA[VALUE_INDEX] = tuple(DATA[VALUE_INDEX])
 
-            print(tabulate(DATA[VALUE_INDEX:VALUE_INDEX+1], headers=TITLES))
+            print(f"\n{tabulate(DATA[VALUE_INDEX:VALUE_INDEX+1], headers=TITLES)}")
+
 
 
         if CHOICE == 2:
