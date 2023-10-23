@@ -37,7 +37,7 @@ def menu():
     print("""
     ___________________________________________________________________________________________________________________
     
-    Welcome to the SUPER HERO SEARCH AND SORT!
+    Welcome to the Recursive SUPER HERO SEARCH AND SORT!
     
     This program will allow you to search for a superhero by using their SuperHero ID, View the sorted SuperHero 
     database, and even add your own superhero to the Database! (Note: Please enter the ID accurately and exactly) 
