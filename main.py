@@ -66,7 +66,7 @@ def menu():
 # Sort the Data using Selection Sort
 def selectionSort(LIST):
     '''
-    Selection sorts the data by the year column
+    Selection sorts the data by the Superhero ID column
     :param LIST: list
     :return: List (sorted)
     '''
@@ -84,6 +84,50 @@ def selectionSort(LIST):
             LIST[i] = LIST[MIN_INDEX]
             LIST[MIN_INDEX] = TEMP
 
+
+    return LIST
+
+
+def quickSort(LIST, FIRST_INDEX, LAST_INDEX):
+    """
+    Quick Sorts the data (recursively)
+    :param LIST: List
+    :param FIRST_INDEX: int
+    :param LAST_INDEX: int
+    :return: List (sorted)
+    """
+
+    if FIRST_INDEX < LAST_INDEX:
+        PIVOT_VALUE = LIST[FIRST_INDEX]
+
+        LEFT_INDEX = FIRST_INDEX + 1
+        RIGHT_INDEX = LAST_INDEX
+
+        DONE = False
+
+
+        while not DONE:
+            while LEFT_INDEX <= RIGHT_INDEX and LIST[LEFT_INDEX] <= PIVOT_VALUE:
+                LEFT_INDEX += 1
+            while RIGHT_INDEX >= LEFT_INDEX and LIST[RIGHT_INDEX] >= PIVOT_VALUE:
+                RIGHT_INDEX -= 1
+
+            if RIGHT_INDEX < LEFT_INDEX:
+                DONE = True
+
+            else:
+                TEMP = LIST[LEFT_INDEX]
+
+                LIST[LEFT_INDEX] = LIST[RIGHT_INDEX]
+
+                LIST[RIGHT_INDEX] = TEMP
+
+        TEMP = LIST[FIRST_INDEX]
+        LIST[FIRST_INDEX] = LIST[RIGHT_INDEX]
+        LIST[RIGHT_INDEX] = TEMP
+
+        quickSort(LIST, FIRST_INDEX, RIGHT_INDEX - 1)
+        quickSort(LIST, RIGHT_INDEX + 1, LAST_INDEX)
 
     return LIST
 
@@ -191,17 +235,27 @@ def addData(LIST):
         CONNECTION.commit()
 
 
-def linearSearch(LIST, VALUE):
+def binarySearch(LIST, VALUE):
     """
-    linear searches the data to find the value
+    Recursive Binary Searches the Data to find the index of the Value
     :param LIST: list
     :param VALUE: str
     :return: index of the value
     """
 
-    for i in range(len(LIST)):
-        if LIST[i][0] == VALUE:
-            return i
+    MIDPOINT = len(LIST) // 2
+
+    # base case
+    if LIST[MIDPOINT] == VALUE:
+        return MIDPOINT
+    else:
+        # recrusive process
+
+        if VALUE < LIST[MIDPOINT]:
+            return binarySearch(LIST[:MIDPOINT], VALUE)
+
+        else:
+            return binarySearch(LIST[MIDPOINT + 1:], VALUE)
 
 
 def getData():
@@ -282,7 +336,7 @@ if __name__ == "__main__":
         else:
             DC_DATA.append(RAW_DATA[i])
 
-    SORTED_DATA = selectionSort(DC_DATA) + selectionSort(MARVEL_DATA)
+    SORTED_DATA = quickSort(DC_DATA, 0, len(DC_DATA)-1) + quickSort(MARVEL_DATA, 0, len(MARVEL_DATA)-1)
 
 
     addData(SORTED_DATA)
@@ -303,7 +357,7 @@ if __name__ == "__main__":
 
 
             USER_SEARCH = userInput(DATA)
-            VALUE_INDEX = linearSearch(DATA, USER_SEARCH)
+            VALUE_INDEX = binarySearch(DATA, USER_SEARCH)
 
 
             #DATA[VALUE_INDEX] = tuple(DATA[VALUE_INDEX])
@@ -314,7 +368,8 @@ if __name__ == "__main__":
 
         if CHOICE == 2:
 
-            print(tabulate(DATA, headers=TITLES))
+            #print(tabulate(DATA, headers=TITLES))
+            print(SORTED_DATA)
 
 
         if CHOICE == 3:
