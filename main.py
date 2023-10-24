@@ -368,7 +368,7 @@ if __name__ == "__main__":
 
         if CHOICE == 2:
 
-            print(tabulate(DATA, headers=TITLES)) # prints gdfaasdf
+            print(tabulate(DATA, headers=TITLES)) # prints
 
 
 
