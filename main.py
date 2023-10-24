@@ -368,8 +368,8 @@ if __name__ == "__main__":
 
         if CHOICE == 2:
 
-            print(tabulate(DATA, headers=TITLES))
-            #print(DATA)
+            print(tabulate(DATA, headers=TITLES)) # prints
+
 
 
         if CHOICE == 3:
