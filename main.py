@@ -246,12 +246,12 @@ def binarySearch(LIST, VALUE):
     MIDPOINT = len(LIST) // 2
 
     # base case
-    if LIST[MIDPOINT] == VALUE:
+    if LIST[MIDPOINT][0][1:] == VALUE[1:]:
         return MIDPOINT
     else:
         # recrusive process
 
-        if VALUE < LIST[MIDPOINT]:
+        if VALUE[1:] < LIST[MIDPOINT][0][1:]:
             return binarySearch(LIST[:MIDPOINT], VALUE)
 
         else:
@@ -330,16 +330,16 @@ if __name__ == "__main__":
 
 
 
-    for i in range(len(RAW_DATA)):
-        if RAW_DATA[i][0][0] == "M":
-            MARVEL_DATA.append(RAW_DATA[i])
-        else:
-            DC_DATA.append(RAW_DATA[i])
+        for i in range(len(RAW_DATA)):
+            if RAW_DATA[i][0][0] == "M":
+                MARVEL_DATA.append(RAW_DATA[i])
+            else:
+                DC_DATA.append(RAW_DATA[i])
 
-    SORTED_DATA = quickSort(DC_DATA, 0, len(DC_DATA)-1) + quickSort(MARVEL_DATA, 0, len(MARVEL_DATA)-1)
+        SORTED_DATA = quickSort(DC_DATA, 0, len(DC_DATA)-1) + quickSort(MARVEL_DATA, 0, len(MARVEL_DATA)-1)
 
 
-    addData(SORTED_DATA)
+        addData(SORTED_DATA)
 
     while True:
 
@@ -368,8 +368,8 @@ if __name__ == "__main__":
 
         if CHOICE == 2:
 
-            #print(tabulate(DATA, headers=TITLES))
-            print(SORTED_DATA)
+            print(tabulate(DATA, headers=TITLES))
+            #print(DATA)
 
 
         if CHOICE == 3:
