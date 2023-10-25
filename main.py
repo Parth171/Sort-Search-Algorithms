@@ -276,16 +276,16 @@ if __name__ == "__main__":
 
 
 
-    for i in range(len(RAW_DATA)):
-        if RAW_DATA[i][0][0] == "M":
-            MARVEL_DATA.append(RAW_DATA[i])
-        else:
-            DC_DATA.append(RAW_DATA[i])
+        for i in range(len(RAW_DATA)):
+            if RAW_DATA[i][0][0] == "M":
+                MARVEL_DATA.append(RAW_DATA[i])
+            else:
+                DC_DATA.append(RAW_DATA[i])
 
-    SORTED_DATA = selectionSort(DC_DATA) + selectionSort(MARVEL_DATA)
+        SORTED_DATA = selectionSort(DC_DATA) + selectionSort(MARVEL_DATA)
 
 
-    addData(SORTED_DATA)
+        addData(SORTED_DATA)
 
     while True:
 
