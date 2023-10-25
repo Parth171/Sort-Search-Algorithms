@@ -64,28 +64,7 @@ def menu():
         return menu()
 
 # Sort the Data using Selection Sort
-def selectionSort(LIST):
-    '''
-    Selection sorts the data by the Superhero ID column
-    :param LIST: list
-    :return: List (sorted)
-    '''
 
-    for i in range(len(LIST)-1):
-        MIN_INDEX = i
-
-        for j in range(i+1, len(LIST)):
-            if LIST[j][0][1:] < LIST[MIN_INDEX][0][1:]:
-                MIN_INDEX = j
-
-
-        if LIST[MIN_INDEX][0][1:] < LIST[i][0][1:]:
-            TEMP = LIST[i]
-            LIST[i] = LIST[MIN_INDEX]
-            LIST[MIN_INDEX] = TEMP
-
-
-    return LIST
 
 
 def quickSort(LIST, FIRST_INDEX, LAST_INDEX):
@@ -247,9 +226,9 @@ def binarySearch(LIST, VALUE):
 
     # base case
     if LIST[MIDPOINT][0][1:] == VALUE[1:]:
-        return MIDPOINT
+        return MIDPOINT, LIST
     else:
-        # recrusive process
+        # recursive process
 
         if VALUE[1:] < LIST[MIDPOINT][0][1:]:
             return binarySearch(LIST[:MIDPOINT], VALUE)
@@ -355,14 +334,12 @@ if __name__ == "__main__":
 
         if CHOICE == 1:
 
-
             USER_SEARCH = userInput(DATA)
-            VALUE_INDEX = binarySearch(DATA, USER_SEARCH)
+            VALUE_INDEX, USER_LIST = binarySearch(DATA, USER_SEARCH)
 
 
-            #DATA[VALUE_INDEX] = tuple(DATA[VALUE_INDEX])
 
-            print(f"\n{tabulate(DATA[VALUE_INDEX:VALUE_INDEX+1], headers=TITLES)}")
+            print(f"\n{tabulate(USER_LIST[VALUE_INDEX:VALUE_INDEX+1], headers=TITLES)}")
 
 
 
