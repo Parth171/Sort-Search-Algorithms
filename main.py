@@ -324,7 +324,7 @@ if __name__ == "__main__":
 
 
         if CHOICE == 4:
-            print("Thanks for using the program!")
+            print("Thanks for using the program!") # thanks user
             break
 
 
