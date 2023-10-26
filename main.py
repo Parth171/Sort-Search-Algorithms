@@ -9,12 +9,14 @@ date-created: 10/12/2023
 import csv
 import pathlib
 import sqlite3
-from tabulate import tabulate
+from tabulate import tabulate # Used to display the Superhero Information neatly to the User
 
 
-
+# Creates the Database File
 DATABASE_FILE = "superhero.db"
 
+
+# Checks if this is the first time running the program
 FIRST_RUN = True
 
 # Checks to see if database file already exists
@@ -24,6 +26,8 @@ if (pathlib.Path.cwd() / DATABASE_FILE).exists():
 CONNECTION = sqlite3.connect(DATABASE_FILE)
 CURSOR = CONNECTION.cursor()
 
+
+# Two Lists used to separate the DC and Marvel Data to individually sort each by the Superhero ID
 MARVEL_DATA = []
 DC_DATA = []
 
@@ -49,6 +53,7 @@ def menu():
     ___________________________________________________________________________________________________________________
     """)
 
+    # Error checks the input to see if it is a numeric value
     USER_INPUT = input("Select your choice: ")
     if USER_INPUT.isnumeric() is False:
         print("Enter a number value.")
@@ -127,13 +132,13 @@ def userInput(DATA):
 
     ID = []
 
-
+    # Error checks to see if the inputted Superhero ID is in the database
     for i in range(len(DATA)):
             ID.append(DATA[i][0])
 
 
     if INPUT not in ID:
-        print("NOT VALID INPUT!")
+        print("INVALID ENTRY!")
         return userInput(DATA)
 
     else:
@@ -142,7 +147,7 @@ def userInput(DATA):
 
 def createDatabase():
     '''
-    Create the superhero datbase
+    Create the superhero database
     :return: None
     '''
 
@@ -249,7 +254,7 @@ def addSuperHero():
     USER_DATA.append(input("YEAR: "))
     USER_DATA.append(input("Brand (Marvel or DC): "))
 
-
+    # Checks to see is all the required data has been inputted
     if USER_DATA[0] == "" or USER_DATA[1] == "" or USER_DATA[10] == "":
         print("You have not entered all the required data")
         return addSuperHero()
@@ -282,6 +287,7 @@ if __name__ == "__main__":
             else:
                 DC_DATA.append(RAW_DATA[i])
 
+        # Selection Sorts the DC and Marvel Data separately and combines it into one List
         SORTED_DATA = selectionSort(DC_DATA) + selectionSort(MARVEL_DATA)
 
 
@@ -289,6 +295,7 @@ if __name__ == "__main__":
 
     while True:
 
+        # Fetches the data from the database
         DATA = getData()
 
         for i in range(len(DATA)):
@@ -297,34 +304,37 @@ if __name__ == "__main__":
                 if DATA[i][j] == "":
                     DATA[i][j] = "N/A"
 
+        # INPUTS #
         CHOICE = menu()
+
 
         if CHOICE == 1:
 
-
+            # PROCESSING #
             USER_SEARCH = userInput(DATA)
             VALUE_INDEX = linearSearch(DATA, USER_SEARCH)
 
-
-            #DATA[VALUE_INDEX] = tuple(DATA[VALUE_INDEX])
-
+            # OUTPUTS #
             print(f"\n{tabulate(DATA[VALUE_INDEX:VALUE_INDEX+1], headers=TITLES)}")
 
 
-
+        # INPUTS #
         if CHOICE == 2:
 
+            # PROCESSING AND OUTPUTS #
             print(tabulate(DATA, headers=TITLES))
 
-
+        # INPUTS #
         if CHOICE == 3:
+            # PROCESSING #
             addSuperHero()
+            # OUTPUTS #
             print("Successfully added your superhero!")
 
-
-
+        # INPUTS #
         if CHOICE == 4:
-            print("Thanks for using the program!") # thanks user
+            # PROCESSING AND OUTPUTS #
+            print("Thanks for using the program!")
             break
 
 
